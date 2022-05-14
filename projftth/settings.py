@@ -142,7 +142,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/' #durante o desenvolvimento usado quando DEBUG=true
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')#usado na producao DEBUG=False
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')#usado na producao DEBUG=False
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
