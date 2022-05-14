@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulocentral %} Lista Pons {% endblock %}
+{% block content %}
+	<section class="container box feature1">
+
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+<td><b></b></td>
+        <td><b>olt: </b></td>
+        <td><b>nomePon: </b></td>
+        <td><b>sinalPon: </b></td>
+        <td><b>portaPon: </b> </td>
+    </tr>
+    {% for objeto in objetos %}
+    <tr>
+<td> <a href="{% url 'url_update_pon' objeto.id %}"><img src="{% static 'images/edit.png'%}" width="20" height="20" /></a></td>
+        <td>{{ objeto.olt.nomeOlt }}</td>
+        <td>{{ objeto.nomePon }}</td>
+        <td>{{ objeto.sinalPon }}</td>
+        <td>{{ objeto.portaPon}}</td>
+
+    </tr>
+    {% endfor %}
+</table>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if objetos.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ objetos.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ objetos.number }} of {{ objetos.paginator.num_pages }}.
+        </span>
+
+        {% if objetos.has_next %}
+            <a href="?page={{ objetos.next_page_number }}">next</a>
+            <a href="?page={{ objetos.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+	</section>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulocentral %} Lista Clientes {% endblock %}
+{% block content %}
+	<section class="container box feature1">
+	<div align="left">
+		<a href="{%url 'url_novo_cliente'%}"><img src="{% static 'images/add.png'%}" width="30" height="30" /></a>
+	</div>
+
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+<td><b></b></td>
+        <td><b>Data nomeCliente: </b></td>
+        <td><b>nomeUser: </b></td>
+        <td><b>password: </b> </td>
+        <td><b>latitude: </b> </td>
+        <td><b>longitude: </b> </td>
+        <td><b>descricao: </b> </td>
+        <td> <b>plano: </b></td>
+        <td><b></b></td>
+    </tr>
+    {% for objeto in objetos %}
+    <tr>
+ <td> <a href="{% url 'url_update_cliente' objeto.id %}"><img src="{% static 'images/edit.png'%}" width="30" height="30" /></a></td>
+        <td>{{ objeto.nomeCliente }}</td>
+        <td>{{ objeto.nomeUser }}</td>
+        <td>{{ objeto.password }}</td>
+        <td>{{ objeto.latitude }}</td>
+        <td>{{ objeto.longitude }}</td>
+        <td>{{ objeto.descricao }}</td>
+        <td> {{ objeto.plano }}</td>
+        <td><a href="{% url 'url_delete_cliente' objeto.id %}"><img src="{% static 'images/delete.png'%}" width="20" height="20" /></a></td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+	</section>
+{% endblock %}

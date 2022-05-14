@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulocentral %} Lista Portas Ctos {% endblock %}
+{% block content %}
+	<section class="container box feature1">
+	<div align="left">
+		<a href="{%url 'url_novo_portasCto'%}"><img src="{% static 'images/add.png'%}" width="30" height="30" /></a>
+	</div>
+
+
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+        <td><b></b></td>
+        <td><b>cto: </b></td>
+        <td><b>numeroPorta: </b></td>
+        <td><b>statusPorta: </b> </td>
+         <td><b></b></td>
+    </tr>
+    {% for objeto in objetos %}
+    <tr>
+<td> <a href="{% url 'url_update_portasCto' objeto.id %}"><img src="{% static 'images/edit.png'%}" width="30" height="30" /></a></td>
+        <td>{{ objeto.cto }}</td>
+        <td>{{ objeto.numeroPorta }}</td>
+        <td>{{ objeto.statusPorta }}</td>
+        <!--   <td> <a href="{% url 'url_delete_portasCto' objeto.id %}"><img src="{% static 'images/delete.png'%}" width="20" height="20" /></a></td>-->
+    </tr>
+    {% endfor %}
+</table>
+    	<div class="pagination">
+    <span class="step-links">
+        {% if objetos.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ objetos.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ objetos.number }} of {{ objetos.paginator.num_pages }}.
+        </span>
+
+        {% if objetos.has_next %}
+            <a href="?page={{ objetos.next_page_number }}">next</a>
+            <a href="?page={{ objetos.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+
+	</section>
+{% endblock %}

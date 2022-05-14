@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulocentral %} Cadastro do Provisionamento{% endblock %}
+{% block content %}
+	<section class="container box feature1">
+
+<form method="post" id="myForm" data-portacto-url="{% url 'ajax_load_portasCto' %}">
+    {% csrf_token %}
+   {{ form.as_p }}
+    <button type="submit">Salvar</button>
+
+</form>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $("#id_cto").change(function () {
+        const url = $("#myForm").attr("data-portacto-url");  // get the url of the `load_cities` view
+        const ctoId = $(this).val();  // get the selected country ID from the HTML input
+
+        $.ajax({                       // initialize an AJAX request
+            url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+            data: {
+                'cto_id': ctoId       // add the country id to the GET parameters
+            },
+            success: function (data) {   // `data` is the return of the `load_cities` view function
+                $("#id_portaCto").html(data);  // replace the contents of the porta input with the data that came from the server
+                /*
+
+                let html_data = '<option value="">---------</option>';
+                data.forEach(function (porta) {
+                    html_data += `<option value="${porta.id}">${porta.numeroPorta}</option>`
+                });
+                console.log(html_data);
+                $("#id_portaCto").html(html_data);
+
+                */
+            }
+        });
+
+    });
+</script>
+
+	</section>
+{% endblock %}

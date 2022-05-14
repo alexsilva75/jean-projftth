@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulocentral %} Lista Olts  {% endblock %}
+{% block content %}
+	<section class="container box feature1">
+	<div align="left">
+		<a href="{%url 'url_novo_olt'%}"><img src="{% static 'images/add.png'%}" width="30" height="30" /></a>
+	</div>
+
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+<td><b></b></td>
+        <td><b>modelo: </b></td>
+        <td><b>nomeOlt: </b></td>
+        <td><b>ip:</b> </td>
+        <td><b>login: </b> </td>
+        <td><b>senha: </b> </td>
+
+    </tr>
+    {% for objeto in objetos %}
+    <tr>
+ <td> <a href="{% url 'url_update_olt' objeto.id %}"><img src="{% static 'images/edit.png'%}" width="30" height="30" /></a></td>
+        <td>{{ objeto.modelo }}</td>
+        <td><a href="{% url 'url_listaPonsDaOlt' objeto.id %}">{{ objeto.nomeOlt }}</a></td>
+        <td>{{ objeto.ip}}</td>
+        <td>{{ objeto.login }}</td>
+        <td>{{ objeto.senha}}</td>
+
+    </tr>
+    {% endfor %}
+</table>
+</div>
+
+	</section>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+	<section class="container box feature1">
+	<div align="left">
+		<a href="{%url 'url_novo_onu'%}"><img src="{% static 'images/add.png'%}" width="30" height="30" /></a>
+	</div>
+
+{% block titulocentral %} Lista Onus {% endblock %}
+
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+<td><b></b></td>
+        <td><b>modeloOnu: </b></td>
+        <td><b>serial: </b></td>
+        <td><b></b></td>
+    </tr>
+    {% for objeto in objetos %}
+    <tr>
+ <td> <a href="{% url 'url_update_onu' objeto.id %}"><img src="{% static 'images/edit.png'%}" width="30" height="30" /></a></td>
+        <td>{{ objeto.modeloOnu }}</td>
+        <td>{{ objeto.serial }}<td><b></b></td>
+           <td> <a href="{% url 'url_delete_onu' objeto.id %}"><img src="{% static 'images/delete.png'%}" width="20" height="20" /></a></td>
+    {% endfor %}
+</table>
+</div>
+	</section>
+{% endblock %}

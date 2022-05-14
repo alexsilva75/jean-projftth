@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+	<section class="container box feature1">
+
+<h4>Lista Portas da cto </h4>
+<br>
+
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+        <td><b>cto: </b></td>
+        <td><b>numeroPorta: </b></td>
+        <td><b>statusPorta: </b> </td>
+     <td><b>descricao</b> </td>
+        <td><b>desprovisionar</b> </td>
+    </tr>
+    {% for objeto in objetos %}
+    <tr>
+
+        <td>{{ objeto.cto.nomeCto }}</td>
+        <td>{{ objeto.numeroPorta }}</td>
+        <td>{{ objeto.statusPorta }}</td>
+        <td>{{ objeto.descricao }}</td>
+        <td>{{ objeto.desprovisionar }}</td>
+
+    </tr>
+    {% endfor %}
+</table>
+</div>
+
+	</section>
+{% endblock %}

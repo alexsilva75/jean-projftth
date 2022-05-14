@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulocentral %} Lista Ctos {% endblock %}
+{% block content %}
+	<section class="container box feature1">
+	<div align="left">
+		<a href="{%url 'url_novo_cto'%}"><img src="{% static 'images/add.png'%}" width="30" height="30" /></a>
+	</div>
+
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+<td><b></b></td>
+        <td><b>pon: </b></td>
+        <td><b>nomeCto: </b></td>
+        <td><b>sinalCto: </b> </td>
+       <!-- <td><b>descricao: </b> </td>-->
+        <td><b>qtdPortas: </b> </td>
+        <td><b>Localizacao: </b> </td>
+
+
+    </tr>
+    {% for objeto in objetos %}
+    <tr>
+<td> <a href="{% url 'url_update_cto' objeto.id %}"><img src="{% static 'images/edit.png'%}" width="20" height="20" /></a></td>
+        <td>{{ objeto.pon }}</td>
+        <td><a href="{% url 'url_listaPortasDaCto' objeto.id %}">{{ objeto.nomeCto }}</a></td>
+        <td>{{ objeto.sinalCto }}</td>
+        <!--<td>{{ objeto.descricao }}</td>-->
+        <td>{{ objeto.qtdPortas }}</td>
+        <td>{{ objeto.latitude }},{{ objeto.longitude }}</td>
+
+    </tr>
+    {% endfor %}
+</table>
+</div>
+        	<div class="pagination">
+    <span>
+        {% if objetos.has_previous %}
+            <a href="?page=1">&laquo; Primeira</a>
+            <a href="?page={{ objetos.previous_page_number }}">Anterior</a>
+        {% endif %}
+
+        <span>
+            Pagina {{ objetos.number }} de {{ objetos.paginator.num_pages }}.
+        </span>
+
+        {% if objetos.has_next %}
+            <a href="?page={{ objetos.next_page_number }}">Proxima</a>
+            <a href="?page={{ objetos.paginator.num_pages }}">Ultima &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+	</section>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulocentral %} Lista Planos {% endblock %}
+{% block content %}
+
+
+	<section class="container box feature1">
+	<div align="left">
+		<a href="{%url 'url_novo_plano'%}"><img src="{% static 'images/add.png'%}" width="30" height="30" /></a>
+	</div>
+
+
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+
+<td><b></b></td>
+        <td><b>nomePlano: </b></td>
+        <td><b>down: </b></td>
+        <td><b>up: </b> </td>
+<td><b></b></td>
+    </tr>
+    {% for objeto in objetos %}
+    <tr>
+ <td> <a href="{% url 'url_update_plano' objeto.id %}"><img src="{% static 'images/edit.png'%}" width="30" height="30" /></a></td>
+        <td>{{ objeto.nomePlano }}</td>
+        <td>{{ objeto.down }}</td>
+        <td>{{ objeto.up}}</td>
+    <td><a href="{% url 'url_delete_plano' objeto.id %}"><img src="{% static 'images/delete.png'%}" width="20" height="20" /></a></td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+
+	</section>
+{% endblock %}

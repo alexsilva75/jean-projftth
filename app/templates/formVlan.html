@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulocentral %} Cadastro da Vlan{% endblock %}
+{% block content %}
+	<section class="container box feature1">
+<form method="post" >
+    {% csrf_token %}
+   {{ form.as_p }}
+    <button type="submit">Salvar</button>
+
+</form>
+
+
+
+
+	</section>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulocentral %} Lista Modelo Olts  {% endblock %}
+{% block content %}
+	<section class="container box feature1">
+	<div align="left">
+		<a href="{%url 'url_novo_modeloOlt'%}"><img src="{% static 'images/add.png'%}" width="30" height="30" /></a>
+	</div>
+
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+<td><b></b></td>
+        <td><b>fabricante: </b></td>
+        <td><b>nomeModeloOlt: </b></td>
+        <td><b>quantPortas: </b> </td>
+        <td><b>descricao: </b> </td>
+
+    </tr>
+    {% for objeto in objetos %}
+    <tr>
+<td> <a href="{% url 'url_update_modeloOlt' objeto.id %}"><img src="{% static 'images/edit.png'%}" width="30" height="30" /></a></td>
+        <td>{{ objeto.fabricante }}</td>
+        <td><i>{{ objeto.nomeModeloOlt }}</i></td>
+        <td>{{ objeto.quantPortas}}</td>
+        <td>{{ objeto.descricao }}</td>
+
+    </tr>
+    {% endfor %}
+</table>
+</div>
+        	</section>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulocentral %} Lista de Provisionados {% endblock %}
+{% block content %}
+<section class="container box feature1">
+	<div align="left">
+		<a href="{%url 'url_nova_provisionamento'%}"><img src="{% static 'images/add.png'%}" width="30" height="30" /></a>
+		Ordenar por >> | <a href="{%url 'url_listaProvisionadosOrder' 1 %}">DATE</a>
+		| <a href="{%url 'url_listaProvisionadosOrder' 2 %}">USER</a>
+		| <a href="{%url 'url_listaProvisionadosOrder' 3 %}">ONU</a> |
+	</div>
+<br>
+<div class="table-responsive">
+  <table class="table">
+		<tr>
+			<td><b></b></td>
+			<!--<td><b>Instalacao: </b></td>-->
+			<!-- <td><b>Cliente: </b></td> -->
+			<td><b>Usuario: </b> </td>
+		<!--	<td><b>senha: </b> </td> -->
+			<!-- <td><b>Plano: </b> </td> -->
+			<!-- <td><b>Localizacao usuario: </b> </td> -->
+			<td> <b>Serial ONU: </b></td>
+			<!-- <td> <b>modelo ONU: </b></td>-->
+			<!-- <td> <b>Modo: </b></td> -->
+			<!-- <td> <b>vlanID: </b></td> -->
+			<td><b>Cto/Porta</b> </td>
+			<td><b>Porta pon: </b> </td>
+			<td><b>GPS Cto: </b> </td>
+			<!--<td> <b>Olt: </b></td>-->
+			<td> <b>Sinal ONU (CTO) OLT</b></td>
+			<td><b></b></td>
+		</tr>
+    	{% for objeto in objetos %}
+		<tr>
+			<td> <a href="{% url 'url_update_provisionamento' objeto.id %}"><img src="{% static 'images/edit.png'%}" width="20" height="20" /></a></td>
+			<!--<td>{{ objeto.dataInstalacao }}</td>-->
+
+			<td>{{ objeto.user }}</td>
+			<!-- <td>{{ objeto.user.latitude }},{{ provisionamento.user.longitude }}</td>-->
+			<td> {{ objeto.onu }}</td>
+			<!-- <td> {{ objetos.onu.modeloOnu.nomeModeloOnu }}</td> -->
+			<!-- <td> {{ objeto.modo }}</td> -->
+			<!-- <td> {{ objeto.vlan.vlanID }}</td> -->
+			<td>{{ objeto.cto }}/<a href="{% url 'url_portaDeUmaCto' objeto.portaCto.id %}" target="_blank">{{ objeto.portaCto }}</a></td>
+
+			<td>{{ objeto.cto.pon }} </td>
+			<td>
+				{%if objeto.cto.latitude%}
+				<a href="https://www.google.pt/maps?q={{objeto.cto.latitude}}{{objeto.cto.longitude}}" target="_blank">
+				{%endif%}
+					{{ objeto.cto.latitude }},{{ objeto.cto.longitude }}
+
+				{%if objeto.cto.latitude%}
+				</a>
+				{%endif%}
+			</td>
+			<!--<td>{{ objeto.cto.pon.olt }} </td>-->
+			<td>{{ objeto.sinal }} ( {{ objeto.cto.sinalCto }} ) {{ objeto.cto.pon.sinalPon }} </td>
+			   <td><a href="{% url 'url_delete_provisionamento' objeto.id %}"><img src="{% static 'images/delete.png'%}" width="20" height="20" /></a></td>
+		</tr>
+    	{% endfor %}
+	</table>
+
+		<div class="pagination">
+    <span>
+        {% if objetos.has_previous %}
+            <a href="?page=1">&laquo; Primeira</a>
+            <a href="?page={{ objetos.previous_page_number }}">Anterior</a>
+        {% endif %}
+
+        <span>
+            Pagina {{ objetos.number }} de {{ objetos.paginator.num_pages }}.
+        </span>
+
+        {% if objetos.has_next %}
+            <a href="?page={{ objetos.next_page_number }}">Proxima</a>
+            <a href="?page={{ objetos.paginator.num_pages }}">Ultima &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+</div>
+</section>
+{% endblock %}

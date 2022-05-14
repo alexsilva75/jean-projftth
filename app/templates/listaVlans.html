@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulocentral %} Lista Vlans {% endblock %}
+{% block content %}
+	<section class="container box feature1">
+
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+<td><b></b></td>
+        <td><b>modo: </b></td>
+        <td><b>nomeValn: </b></td>
+        <td><b>vlanID: </b> </td>
+        <td><b>pon: </b> </td>
+    </tr>
+    {% for objeto in objetos %}
+    <tr>
+<td> <a href="{% url 'url_update_vlan' objeto.id %}"><img src="{% static 'images/edit.png'%}" width="30" height="30" /></a></td>
+        <td>{{ objeto.modo }}</td>
+        <td>{{ objeto.nomeValn }}</td>
+        <td>{{ objeto.vlanID}}</td>
+        <td>{{ objeto.pon }}</td>
+
+    </tr>
+    {% endfor %}
+</table>
+</div>
+        	<div class="pagination">
+    <span>
+        {% if objetos.has_previous %}
+            <a href="?page=1">&laquo; Primeira</a>
+            <a href="?page={{ objetos.previous_page_number }}">Anterior</a>
+        {% endif %}
+
+        <span>
+            Pagina {{ objetos.number }} de {{ objetos.paginator.num_pages }}.
+        </span>
+
+        {% if objetos.has_next %}
+            <a href="?page={{ objetos.next_page_number }}">Proxima</a>
+            <a href="?page={{ objetos.paginator.num_pages }}">Ultima &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+	</section>
+{% endblock %}

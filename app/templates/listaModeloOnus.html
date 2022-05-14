@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulocentral %} Lista Modelo Onus {% endblock %}
+{% block content %}
+	<section class="container box feature1">
+	<div align="left">
+		 <a href="{%url 'url_novo_modeloOnu'%}"><img src="{% static 'images/add.png'%}" width="30" height="30" /></a>
+	</div>
+
+{% block titulocentral %} Lista Modelo Onus {% endblock %}
+
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+<td><b></b></td>
+        <td><b>fabricante: </b></td>
+        <td><b>nomeModeloOnu: </b></td>
+        <td><b>quantPortasLans: </b> </td>
+        <td><b>wifi: </b> </td>
+        <td><b>descricao: </b> </td>
+        <td><b></b></td>
+    </tr>
+    {% for objeto in objetos %}
+    <tr>
+ <td> <a href="{% url 'url_update_modeloOnu' objeto.id %}"><img src="{% static 'images/edit.png'%}" width="30" height="30" /></a></td>
+        <td>{{ objeto.fabricante }}</td>
+        <td>{{ objeto.nomeModeloOnu }}</td>
+        <td>{{ objeto.quantPortasLans}}</td>
+        <td>{{ objeto.wifi }}</td>
+        <td>{{ objeto.descricao}}</td>
+        <td><a href="{% url 'url_delete_modeloOnu' objeto.id %}"><img src="{% static 'images/delete.png'%}" width="20" height="20" /></a></td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+
+	</section>
+{% endblock %}

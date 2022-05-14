@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulocentral %} Lista Fabricantes {% endblock %}
+{% block content %}
+	<section class="container box feature1">
+	<div align="left">
+		<a href="{%url 'url_novo_fabricante'%}"><img src="{% static 'images/add.png'%}" width="30" height="30" /></a>
+	</div>
+
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+        <td><b></b></td>
+        <td><b>Fabricante: </b></td>
+        <td><b>descricao: </b></td>
+
+    </tr>
+    {% for objeto in objetos %}
+    <tr>
+        <td> <a href="{% url 'url_update_fabricante' objeto.id %}"><img src="{% static 'images/edit.png'%}" width="30" height="30" /></a></td>
+        <td><i>{{ objeto.nomeFabricante }}</i></td>
+        <td>{{ objeto.descricao }}</td>
+
+    </tr>
+    {% endfor %}
+</table>
+</div>
+        	</section>
+{% endblock %}
