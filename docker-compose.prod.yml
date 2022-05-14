@@ -15,7 +15,7 @@ services:
     volumes:
       - ./:/app
     ports:
-      - 80:80
+      - 8000:80
     depends_on:
       - web
     restart: always
